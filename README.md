@@ -16,6 +16,7 @@ Add this to your Lazy plugin specifications:
 ```lua
 {
   "OliverHeffernan/oilDocs",
+  branch = "main",
   main = "oilDocs",
   lazy = false,
   dependencies = {
@@ -35,8 +36,10 @@ Add this to your Lazy plugin specifications:
 }
 ```
 
-`lazy = false` ensures oilDocs registers its handler before Oil emits its first
-`OilEnter` event.
+`branch = "main"` makes the target branch explicit and prevents Lazy from
+failing if a local checkout is missing its `origin/HEAD` default-branch
+metadata. `lazy = false` ensures oilDocs registers its handler before Oil emits
+its first `OilEnter` event.
 
 If Oil already has its own Lazy specification, keeping it in `dependencies`
 here is safe: Lazy merges specifications for the same plugin.
