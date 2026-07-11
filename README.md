@@ -89,7 +89,8 @@ left. State is independent for each Oil window.
 
 - `gN` opens the note for editing and offers to create a missing note.
 - `gM` or `:OilDocsToggle` hides or shows the preview for the current Oil
-  window.
+  window. A hidden preview stays hidden while navigating between directories,
+  until it is toggled on again.
 - Saving an open note reloads its preview automatically.
 
 Set a keymap to `false` or `nil` to disable it. Unsupported and remote Oil

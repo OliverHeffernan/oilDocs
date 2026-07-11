@@ -136,13 +136,6 @@ function M.setup(options)
     callback = function(args)
       vim.schedule(function()
         view.close_for_buffer(args.buf)
-        for oil_window in pairs(hidden) do
-          if not vim.api.nvim_win_is_valid(oil_window)
-            or vim.api.nvim_win_get_buf(oil_window) ~= args.buf
-          then
-            hidden[oil_window] = nil
-          end
-        end
       end)
     end,
   })
