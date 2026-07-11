@@ -111,6 +111,16 @@ local function set_keymaps(buffer)
   end
 end
 
+local function schedule_sync(oil_buffer)
+  if not oil_buffer then
+    return
+  end
+  set_keymaps(oil_buffer)
+  vim.schedule(function()
+    M.sync(oil_buffer)
+  end)
+end
+
 function M.setup(options)
   config = config_module.resolve(options)
   local group = vim.api.nvim_create_augroup("OilDocs", { clear = true })
@@ -120,13 +130,18 @@ function M.setup(options)
     pattern = "OilEnter",
     callback = function(args)
       local oil_buffer = args.data and args.data.buf or args.buf
-      if not oil_buffer then
-        return
-      end
-      set_keymaps(oil_buffer)
-      vim.schedule(function()
-        M.sync(oil_buffer)
-      end)
+      schedule_sync(oil_buffer)
+    end,
+  })
+
+  -- OilEnter is emitted when Oil finishes loading a directory buffer. Returning
+  -- to a cached directory can skip that event, so BufEnter keeps the preview in
+  -- sync when revisiting an existing Oil buffer.
+  vim.api.nvim_create_autocmd("BufEnter", {
+    group = group,
+    pattern = "oil://*",
+    callback = function(args)
+      schedule_sync(args.buf)
     end,
   })
 
