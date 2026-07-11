@@ -27,7 +27,11 @@ local function create_window(oil_window, buffer, config)
   local preview_window
 
   vim.api.nvim_win_call(oil_window, function()
-    vim.cmd(("belowright %dsplit"):format(config.height))
+    if config.split == "vertical" then
+      vim.cmd(("belowright %dvsplit"):format(config.width))
+    else
+      vim.cmd(("belowright %dsplit"):format(config.height))
+    end
     preview_window = vim.api.nvim_get_current_win()
     vim.api.nvim_win_set_buf(preview_window, buffer)
   end)
@@ -36,7 +40,8 @@ local function create_window(oil_window, buffer, config)
     vim.api.nvim_set_current_win(oil_window)
   end
 
-  vim.wo[preview_window].winfixheight = true
+  vim.wo[preview_window].winfixheight = config.split == "horizontal"
+  vim.wo[preview_window].winfixwidth = config.split == "vertical"
   vim.wo[preview_window].number = false
   vim.wo[preview_window].relativenumber = false
   vim.wo[preview_window].signcolumn = "no"

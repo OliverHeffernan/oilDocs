@@ -1,8 +1,8 @@
 # oil-notes.nvim
 
-`oil-notes.nvim` shows a directory's Markdown note in a read-only split below
-[oil.nvim](https://github.com/stevearc/oil.nvim). For `/projects/example/`, the
-default note is `/projects/example/example.md`.
+`oil-notes.nvim` shows a directory's Markdown note in a read-only horizontal or
+vertical split beside [oil.nvim](https://github.com/stevearc/oil.nvim). For
+`/projects/example/`, the default note is `/projects/example/example.md`.
 
 ## Requirements
 
@@ -22,7 +22,9 @@ Add this to your Lazy plugin specifications:
     "stevearc/oil.nvim",
   },
   opts = {
+    split = "horizontal",
     height = 12,
+    width = 48,
     close_when_missing = true,
     create_missing = true,
     keymaps = {
@@ -61,7 +63,9 @@ configuration is:
 
 ```lua
 require("oil-notes").setup({
+  split = "horizontal", -- "horizontal" below Oil, or "vertical" to its right
   height = 12,
+  width = 48,
   filename = function(directory, name)
     return vim.fs.joinpath(directory, name .. ".md")
   end,
@@ -73,6 +77,9 @@ require("oil-notes").setup({
   },
 })
 ```
+
+`height` controls the preview size when `split = "horizontal"`. `width`
+controls it when `split = "vertical"`.
 
 When using Lazy, place these same fields inside the `opts` table rather than
 calling `setup()` separately.
