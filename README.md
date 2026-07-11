@@ -1,6 +1,6 @@
-# oil-notes.nvim
+# oilDocs
 
-`oil-notes.nvim` shows a directory's Markdown note in a read-only horizontal or
+`oilDocs` shows a directory's Markdown document in a read-only horizontal or
 vertical split beside [oil.nvim](https://github.com/stevearc/oil.nvim). For
 `/projects/example/`, the default note is `/projects/example/example.md`.
 
@@ -16,7 +16,7 @@ Add this to your Lazy plugin specifications:
 ```lua
 {
   "OliverHeffernan/oilDocs",
-  main = "oil-notes",
+  main = "oilDocs",
   lazy = false,
   dependencies = {
     "stevearc/oil.nvim",
@@ -35,9 +35,8 @@ Add this to your Lazy plugin specifications:
 }
 ```
 
-`main = "oil-notes"` tells Lazy which Lua module to configure because the
-repository name differs from the module name. `lazy = false` ensures the
-plugin registers its handler before Oil emits its first `OilEnter` event.
+`lazy = false` ensures oilDocs registers its handler before Oil emits its first
+`OilEnter` event.
 
 If Oil already has its own Lazy specification, keeping it in `dependencies`
 here is safe: Lazy merges specifications for the same plugin.
@@ -48,8 +47,8 @@ repository:
 ```lua
 {
   dir = "/Users/oliverheffernan/Documents/aMyDocuments/CDT/2026/oilDocs",
-  name = "oil-notes.nvim",
-  main = "oil-notes",
+  name = "oilDocs",
+  main = "oilDocs",
   lazy = false,
   dependencies = { "stevearc/oil.nvim" },
   opts = {},
@@ -58,11 +57,11 @@ repository:
 
 ## Configuration
 
-Lazy passes `opts` to `require("oil-notes").setup()`. The complete default-style
+Lazy passes `opts` to `require("oilDocs").setup()`. The complete default-style
 configuration is:
 
 ```lua
-require("oil-notes").setup({
+require("oilDocs").setup({
   split = "horizontal", -- "horizontal" below Oil, or "vertical" to its right
   height = 12,
   width = 48,
@@ -89,7 +88,7 @@ and never takes focus. It closes when the note is missing or the Oil window is
 left. State is independent for each Oil window.
 
 - `gN` opens the note for editing and offers to create a missing note.
-- `gM` or `:OilNotesToggle` hides or shows the preview for the current Oil
+- `gM` or `:OilDocsToggle` hides or shows the preview for the current Oil
   window.
 - Saving an open note reloads its preview automatically.
 

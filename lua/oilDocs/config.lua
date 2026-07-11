@@ -19,16 +19,16 @@ function M.resolve(options)
   local config = vim.tbl_deep_extend("force", {}, M.defaults, options or {})
 
   if config.split ~= "horizontal" and config.split ~= "vertical" then
-    error("oil-notes: split must be 'horizontal' or 'vertical'")
+    error("oilDocs: split must be 'horizontal' or 'vertical'")
   end
   if type(config.height) ~= "number" or config.height < 1 then
-    error("oil-notes: height must be a positive number")
+    error("oilDocs: height must be a positive number")
   end
   if type(config.width) ~= "number" or config.width < 1 then
-    error("oil-notes: width must be a positive number")
+    error("oilDocs: width must be a positive number")
   end
   if type(config.filename) ~= "function" then
-    error("oil-notes: filename must be a function")
+    error("oilDocs: filename must be a function")
   end
 
   return config

@@ -1,6 +1,6 @@
-local config_module = require("oil-notes.config")
-local notes = require("oil-notes.notes")
-local view = require("oil-notes.view")
+local config_module = require("oilDocs.config")
+local notes = require("oilDocs.notes")
+local view = require("oilDocs.view")
 
 local M = {}
 local config = config_module.resolve()
@@ -113,7 +113,7 @@ end
 
 function M.setup(options)
   config = config_module.resolve(options)
-  local group = vim.api.nvim_create_augroup("OilNotes", { clear = true })
+  local group = vim.api.nvim_create_augroup("OilDocs", { clear = true })
 
   vim.api.nvim_create_autocmd("User", {
     group = group,
@@ -168,7 +168,7 @@ function M.setup(options)
     end,
   })
 
-  vim.api.nvim_create_user_command("OilNotesToggle", M.toggle, {
+  vim.api.nvim_create_user_command("OilDocsToggle", M.toggle, {
     desc = "Toggle the Oil directory note preview",
     force = true,
   })

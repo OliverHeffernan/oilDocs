@@ -70,7 +70,7 @@ function M.show(oil_window, note_path, lines, config)
   vim.bo[buffer].modifiable = false
   vim.bo[buffer].modified = false
   -- Buffer names must be unique even when two Oil windows show the same note.
-  vim.api.nvim_buf_set_name(buffer, ("oil-notes://%d/%s"):format(oil_window, note_path))
+  vim.api.nvim_buf_set_name(buffer, ("oilDocs://%d/%s"):format(oil_window, note_path))
 
   states[oil_window] = {
     preview_window = preview_window,
