@@ -80,6 +80,17 @@ require("oilDocs").setup({
 `height` controls the preview size when `split = "horizontal"`. `width`
 controls it when `split = "vertical"`.
 
+`create_missing` controls what happens when `gN` is pressed and the current
+directory does not yet have a Markdown document:
+
+- When `true`, oilDocs asks for confirmation, creates the document with a
+  `# Directory name` heading, and opens it for editing.
+- When `false`, oilDocs displays a notification and does not create or open a
+  document.
+
+This option never creates documents automatically while navigating in Oil. It
+only applies when explicitly opening a document with `gN`.
+
 When using Lazy, place these same fields inside the `opts` table rather than
 calling `setup()` separately.
 
